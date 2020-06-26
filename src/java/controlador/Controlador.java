@@ -60,7 +60,7 @@ public class Controlador extends HttpServlet {
             }*/
             request.getSession().setAttribute("nom", "Usuario");
             request.getSession().setAttribute("correo", "miguel@gmail.com");
-            request.getRequestDispatcher("principal.jsp").forward(request,response);
+            request.getRequestDispatcher("principal.html").forward(request,response);
             
         }
         if(accion.equals("Salir")){
