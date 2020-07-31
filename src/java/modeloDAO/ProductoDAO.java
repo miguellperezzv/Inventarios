@@ -178,4 +178,25 @@ public class ProductoDAO implements CRUDProducto {
             return rs;
         }
     }
+    
+     public  ResultSet listarPorProveedor(String nombre){
+        String sql = "SELECT p.k_producto, pro.n_proveedor, p.n_nombre, p.n_descripcion, p.p_precio, c.n_nombre categoria, p.n_cantidad \n"
+                + "FROM PRODUCTO as p,CATEGORIA as c, PROVEEDOR as pro\n"
+                + "WHERE p.fk_categoria = c.K_CATEGORIA AND p.fk_proveedor = pro.k_proveedor  \n"
+                + "\n"
+                + "AND ( (UPPER (pro.n_proveedor) = '"+nombre+"')\n"
+                + "	);";
+        
+        try{
+            conn = cn.getConnection();
+            st = conn.prepareStatement(sql);
+            System.out.println("LA SENTENCIA SQL ES :" + sql);
+            rs = st.executeQuery();
+            return rs;
+        }
+        catch(SQLException e){
+            System.out.println("ERROR EN PRODUCTO DAO LISTAR POR proveedor"+ e);
+            return rs;
+        }
+    }
 }

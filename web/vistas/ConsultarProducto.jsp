@@ -37,7 +37,7 @@
         <div style="margin-left: 50px; margin-right: 50px;">
             <%ResultSet rs = null;
             ProductoDAO dao = new ProductoDAO();
-            rs = dao.listarPorKey("BAVARIA");
+            rs = dao.listarPorKey("POSTOBON");
             %>
             
             <table class="table table-striped table-bordered">

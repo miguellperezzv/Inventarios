@@ -7,7 +7,7 @@
             <a id="menu1" class="navbar-toggler" href="Controlador?accion=Home" ><span class="navbar-toggler-icon"></span>HOME</a>
             
             <div id="menu1" class="dropdown">
-                <a id="menu1" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a id="menu1" class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 PRODUCTO               </a>
                 <div id="menu1" class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <a id="menu1" class="dropdown-item" href="ControladorProducto?accion=Consultar">CONSULTAR</a>

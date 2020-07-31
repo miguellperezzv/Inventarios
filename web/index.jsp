@@ -26,7 +26,7 @@ and open the template in the editor.
         </div>
         <div class="form-group">
             <label>Contraseña:</label>
-             <input class="form-control" type="text" name="txtContrasena" placeholder="Ingrese su contraseña">
+             <input class="form-control" type="password" name="txtContrasena" placeholder="Ingrese su contraseña">
         </div>
         <input class="btn btn-danger btn-block" type="submit" name="accion" value="ingresar" >
         

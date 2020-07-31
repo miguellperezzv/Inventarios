@@ -61,4 +61,47 @@ public class ProveedorDAO {
        }
 
     }
+    
+    public Proveedor ProveedorPorNombre(String nombre){
+        String sql = "SELECT * FROM PROVEEDOR WHERE n_proveedor = '" +nombre+"'";
+        Proveedor p = new Proveedor();
+        try {
+            conn=cn.getConnection();
+            st=conn.prepareStatement(sql);
+            System.out.println("LA SENTENCIA SQL ES :" +sql);
+            rs=st.executeQuery();
+            while(rs.next()){
+                p.setK_proveedor(rs.getInt("k_proveedor"));
+                p.setN_proveedor(rs.getString("n_proveedor"));
+                p.setC_correo(rs.getString("c_correo"));
+                p.setC_telefono(rs.getInt("c_telefono"));
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("Error en ProveedorPORNOMBRE DAO "+ ex);
+        }
+         return p;   
+
+    }
+    
+    public int getCantidadProductos(String nombre){
+        
+        String sql = "SELECT COUNT(*) FROM PRODUCTO p, PROVEEDOR pro WHERE p.fk_proveedor = pro.k_proveedor AND pro.n_proveedor = '"+nombre+"'"; 
+        int cantidad=0;
+        try {
+            conn=cn.getConnection();
+            st=conn.prepareStatement(sql);
+            System.out.println("LA SENTENCIA SQL ES :" +sql);
+            rs=st.executeQuery();
+            while(rs.next()){
+                cantidad = rs.getInt("count");
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("Error en getCantidadProductos en DAO "+ ex);
+        }
+        return cantidad;
+    }
+    
+   
 }
