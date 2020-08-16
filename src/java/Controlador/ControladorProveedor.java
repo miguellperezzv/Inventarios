@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Producto;
 import modelo.Proveedor;
+import modeloDAO.CategoriaDAO;
 import modeloDAO.ProductoDAO;
 import modeloDAO.ProveedorDAO;
 
@@ -45,7 +46,7 @@ public class ControladorProveedor extends HttpServlet {
         String accion = request.getParameter("accion");
         
         if(accion.equalsIgnoreCase("Proveedor")){
-            request.getRequestDispatcher("vistas/Proveedores.jsp").forward(request, response);
+            request.getRequestDispatcher("vistas/ConsultarProveedor.jsp").forward(request, response);
         }
         
         if(accion.equalsIgnoreCase("Registrar")){
@@ -70,8 +71,10 @@ public class ControladorProveedor extends HttpServlet {
             String dato = request.getParameter("txtBuscar");
             Proveedor prov = dao.ProveedorPorNombre(dato);
             List<Producto> lista = pdao.ProductosPorProveedor(prov.getN_proveedor());
-            request.setAttribute("productos", lista);
+            request.setAttribute("lista", lista);
             request.setAttribute("prov", prov);
+            request.setAttribute("daoProv", new ProveedorDAO());
+            request.setAttribute("daoCat", new CategoriaDAO());
             request.getRequestDispatcher("vistas/ConsultarProveedor.jsp").forward(request, response);
         }
         try (PrintWriter out = response.getWriter()) {

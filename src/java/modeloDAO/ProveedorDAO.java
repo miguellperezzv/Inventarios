@@ -63,7 +63,16 @@ public class ProveedorDAO {
     }
     
     public Proveedor ProveedorPorNombre(String nombre){
-        String sql = "SELECT * FROM PROVEEDOR WHERE LOWER(n_proveedor) LIKE '%"+nombre.toLowerCase()+"%' OR LOWER (c_correo) LIKE '%"+nombre.toLowerCase()+"%';";
+        String sql ="";
+        try{
+            int numero = Integer.parseInt(nombre);
+            sql = "SELECT * FROM PROVEEDOR WHERE LOWER(n_proveedor) LIKE '%"+nombre.toLowerCase()+"%' OR LOWER (c_correo) LIKE '%"+nombre.toLowerCase()+"%' OR k_proveedor = "+numero+" ;";
+        }catch(NumberFormatException e){
+            sql = "SELECT * FROM PROVEEDOR WHERE LOWER(n_proveedor) LIKE '%"+nombre.toLowerCase()+"%' OR LOWER (c_correo) LIKE '%"+nombre.toLowerCase()+"%' ;";
+
+        }
+        
+        
         Proveedor p = new Proveedor();
         try {
             conn=cn.getConnection();

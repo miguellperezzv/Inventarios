@@ -87,9 +87,9 @@
                         </button>
                     </div>
                     <form action="ControladorCategoria">
-                        <div class="modal-body">
-                            <div class="form-group">  
-                                <label id="container">Nueva Categoria:</label>
+                        <div class="modal-body" >
+                            <div class="form-group" style="background-color : #ffffff">  
+                                <label >Nueva Categoria:</label>
                                 <input class="form-control" type="text" name="txtNombre">
                             </div>
 

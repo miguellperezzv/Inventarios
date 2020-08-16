@@ -1,5 +1,5 @@
 
-        <div class ="container col-lg-5" background-color="#ffffff"  margin-top="50px">
+<div class ="container col-lg-6" background-color="#ffffff"  margin-top="50px">
             <form action="ControladorProveedor"> 
 
                 <div class="form-group">
@@ -28,6 +28,6 @@
 
                 <input class="btn btn-danger btn-block" type="submit" name="accion" value="Registrar" >
                 </form>
-                </div>
+          </div>      
             
-        </div>
+    

@@ -200,11 +200,11 @@ public class ProductoDAO implements CRUDProducto {
 
     public List<Producto> ProductosPorProveedor(String nombre) {
         List<Producto> lista = new ArrayList<>();
-        String sql = "SELECT p.k_producto, pro.n_proveedor, p.n_nombre, p.n_descripcion, p.p_precio, p.fk_categoria categoria, p.n_cantidad \n"
+        String sql = "SELECT p.k_producto, p.fk_proveedor, p.n_nombre, p.n_descripcion, p.p_precio, p.fk_categoria, p.n_cantidad \n"
                 + "FROM PRODUCTO as p,CATEGORIA as c, PROVEEDOR as pro\n"
                 + "WHERE p.fk_categoria = c.K_CATEGORIA AND p.fk_proveedor = pro.k_proveedor  \n"
                 + "\n"
-                + "AND ( (UPPER (pro.n_proveedor) = '" + nombre + "')\n"
+                + "AND ( (UPPER (pro.n_proveedor) LIKE '" + nombre + "')\n"
                 + "	);";
 
         try {
@@ -215,11 +215,11 @@ public class ProductoDAO implements CRUDProducto {
             while (rs.next()) {
                 Producto p = new Producto();
                 p.setK_producto(rs.getString("k_producto"));
-                p.setN_proveedor(rs.getString("n_proveedor"));
+                p.setFk_proveedor(rs.getInt("fk_proveedor"));
                 p.setN_nombre(rs.getString("n_nombre"));
                 p.setN_descripcion(rs.getString("n_descripcion"));
                 p.setP_precio(rs.getInt("p_precio"));
-                p.setFk_categoria(rs.getInt("categoria"));
+                p.setFk_categoria(rs.getInt("fk_categoria"));
                 p.setN_cantidad(rs.getInt("n_cantidad"));
                 lista.add(p);
             }
@@ -232,7 +232,10 @@ public class ProductoDAO implements CRUDProducto {
 
     public List<Producto> ConsultarProductoClave(String clave) {
         List<Producto> lista = new ArrayList<>();
-        String sql = "SELECT p.k_producto, p.fk_proveedor, p.n_nombre, p.n_descripcion, p.p_precio, p.fk_categoria, p.n_cantidad from PRODUCTO p, CATEGORIA c, PROVEEDOR pro\n"
+        String sql = "";
+        try{
+            int numero = Integer.parseInt(clave);
+            sql = "SELECT p.k_producto, p.fk_proveedor, p.n_nombre, p.n_descripcion, p.p_precio, p.fk_categoria, p.n_cantidad from PRODUCTO p, CATEGORIA c, PROVEEDOR pro\n"
                 + "WHERE p.fk_categoria = c.k_categoria\n"
                 + "AND p.fk_proveedor = pro.k_proveedor\n"
                 + "AND(\n"
@@ -240,8 +243,27 @@ public class ProductoDAO implements CRUDProducto {
                 + "	LOWER(p.n_descripcion) LIKE '%"+clave+"%' OR\n"
                 + "	LOWER(c.n_nombre) LIKE '%"+clave+"%' OR\n"
                 + "	LOWER(pro.n_proveedor) LIKE '%"+clave+"%' OR\n"
-                + "	LOWER(pro.c_correo) LIKE '%"+clave+"%'\n"
+                + "	LOWER(pro.c_correo) LIKE '%"+clave+"%'  OR\n"
+                + "     p.k_producto = "+numero+"     \n"
                 + ")";
+        }
+        catch(NumberFormatException e){
+            System.out.println("ERROR EN NUMERO + "+e);
+            sql = "SELECT p.k_producto, p.fk_proveedor, p.n_nombre, p.n_descripcion, p.p_precio, p.fk_categoria, p.n_cantidad from PRODUCTO p, CATEGORIA c, PROVEEDOR pro\n"
+                + "WHERE p.fk_categoria = c.k_categoria\n"
+                + "AND p.fk_proveedor = pro.k_proveedor\n"
+                + "AND(\n"
+                + "	LOWER(p.n_nombre) LIKE '%"+clave+"%' OR\n"
+                + "	LOWER(p.n_descripcion) LIKE '%"+clave+"%' OR\n"
+                + "	LOWER(c.n_nombre) LIKE '%"+clave+"%' OR\n"
+                + "	LOWER(pro.n_proveedor) LIKE '%"+clave+"%' OR\n"
+                + "	LOWER(pro.c_correo) LIKE '%"+clave+"%' \n"
+                
+                + ")";
+        }
+        
+        
+        
         try {
             conn = cn.getConnection();
             st = conn.prepareStatement(sql);
