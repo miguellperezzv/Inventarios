@@ -11,12 +11,15 @@ import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Producto;
+import modeloDAO.CategoriaDAO;
 import modeloDAO.ProductoDAO;
+import modeloDAO.ProveedorDAO;
 
 /**
  *
@@ -62,6 +65,17 @@ public class ControladorProducto extends HttpServlet {
             //request.getSession().setAttribute("nom", "Usuario");
             //request.getSession().setAttribute("correo", "miguel@gmail.com");
             request.getRequestDispatcher("vistas/NuevoProducto.jsp").forward(request, response);
+        }
+        
+        if(accion.equals("buscar")){
+            String clave = request.getParameter("txtBuscar");
+            System.out.println("ENTRANDO A BUSCAR PRODUCTO, la clave es"+ clave);
+            List<Producto> lista = dao.ConsultarProductoClave(clave);
+            request.setAttribute("lista", lista);
+            request.setAttribute("dao", dao);
+            request.setAttribute("daoProv", new ProveedorDAO());
+            request.setAttribute("daoCat", new CategoriaDAO());
+            request.getRequestDispatcher("vistas/ConsultarProducto.jsp").forward(request, response);
         }
 
         if (accion.equalsIgnoreCase("Registrar")) {

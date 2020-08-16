@@ -19,6 +19,7 @@ public class Producto {
     int fk_proveedor;
     int n_disponibilidad;
     int n_cantidad;
+    String N_proveedor;
 
     public Producto() {
         
@@ -86,6 +87,10 @@ public class Producto {
 
     public void setN_cantidad(int n_cantidad) {
         this.n_cantidad = n_cantidad;
+    }
+
+    public void setN_proveedor(String string) {
+        this.N_proveedor = string;
     }
 
     

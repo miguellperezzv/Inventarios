@@ -142,5 +142,21 @@ public class CategoriaDAO implements CRUDCategoria{
         }
         return b;
     }
-    
+    public String CategoriaPorCodigo(int codigo){
+        String nombre="";
+       String sql = "SELECT n_nombre FROM categoria WHERE k_categoria = "+codigo;
+       try {
+            conn=cn.getConnection();
+            st=conn.prepareStatement(sql);
+            System.out.println("LA SENTENCIA SQL ES :" +sql);
+            rs=st.executeQuery();
+            while(rs.next()){
+                nombre = rs.getString("n_nombre");
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("Error enobtener nombre categoria por codigo en DAO "+ ex);
+        }
+       return nombre;
+    }
 }

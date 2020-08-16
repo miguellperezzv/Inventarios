@@ -160,43 +160,111 @@ public class ProductoDAO implements CRUDProducto {
                 + "FROM PRODUCTO as p,CATEGORIA as c, PROVEEDOR as pro\n"
                 + "WHERE p.fk_categoria = c.K_CATEGORIA AND p.fk_proveedor = pro.k_proveedor  \n"
                 + "\n"
-                + "AND ( (UPPER (pro.n_proveedor) LIKE '%"+key+"%')\n"
-                + "OR (UPPER (p.n_nombre) LIKE '%"+key+"%')\n"
-                + "OR (UPPER (c.n_nombre) LIKE '%"+key+"%')	\n"
-                + "OR (UPPER (p.n_descripcion) LIKE '%"+key+"%')	\n"
+                + "AND ( (UPPER (pro.n_proveedor) LIKE '%" + key + "%')\n"
+                + "OR (UPPER (p.n_nombre) LIKE '%" + key + "%')\n"
+                + "OR (UPPER (c.n_nombre) LIKE '%" + key + "%')	\n"
+                + "OR (UPPER (p.n_descripcion) LIKE '%" + key + "%')	\n"
                 + "	);";
-        
-        try{
+
+        try {
             conn = cn.getConnection();
             st = conn.prepareStatement(sql);
             System.out.println("LA SENTENCIA SQL ES :" + sql);
             rs = st.executeQuery();
             return rs;
-        }
-        catch(SQLException e){
-            System.out.println("ERROR EN PRODUCTO DAO LISTAR POR KEY "+ e);
+        } catch (SQLException e) {
+            System.out.println("ERROR EN PRODUCTO DAO LISTAR POR KEY " + e);
             return rs;
         }
     }
-    
-     public  ResultSet listarPorProveedor(String nombre){
+
+    public ResultSet listarPorProveedor(String nombre) {
         String sql = "SELECT p.k_producto, pro.n_proveedor, p.n_nombre, p.n_descripcion, p.p_precio, c.n_nombre categoria, p.n_cantidad \n"
                 + "FROM PRODUCTO as p,CATEGORIA as c, PROVEEDOR as pro\n"
                 + "WHERE p.fk_categoria = c.K_CATEGORIA AND p.fk_proveedor = pro.k_proveedor  \n"
                 + "\n"
-                + "AND ( (UPPER (pro.n_proveedor) = '"+nombre+"')\n"
+                + "AND ( (UPPER (pro.n_proveedor) = '" + nombre + "')\n"
                 + "	);";
-        
-        try{
+
+        try {
             conn = cn.getConnection();
             st = conn.prepareStatement(sql);
             System.out.println("LA SENTENCIA SQL ES :" + sql);
             rs = st.executeQuery();
             return rs;
-        }
-        catch(SQLException e){
-            System.out.println("ERROR EN PRODUCTO DAO LISTAR POR proveedor"+ e);
+        } catch (SQLException e) {
+            System.out.println("ERROR EN PRODUCTO DAO LISTAR POR proveedor" + e);
             return rs;
         }
     }
+
+    public List<Producto> ProductosPorProveedor(String nombre) {
+        List<Producto> lista = new ArrayList<>();
+        String sql = "SELECT p.k_producto, pro.n_proveedor, p.n_nombre, p.n_descripcion, p.p_precio, p.fk_categoria categoria, p.n_cantidad \n"
+                + "FROM PRODUCTO as p,CATEGORIA as c, PROVEEDOR as pro\n"
+                + "WHERE p.fk_categoria = c.K_CATEGORIA AND p.fk_proveedor = pro.k_proveedor  \n"
+                + "\n"
+                + "AND ( (UPPER (pro.n_proveedor) = '" + nombre + "')\n"
+                + "	);";
+
+        try {
+            conn = cn.getConnection();
+            st = conn.prepareStatement(sql);
+            System.out.println("LA SENTENCIA SQL ES :" + sql);
+            rs = st.executeQuery();
+            while (rs.next()) {
+                Producto p = new Producto();
+                p.setK_producto(rs.getString("k_producto"));
+                p.setN_proveedor(rs.getString("n_proveedor"));
+                p.setN_nombre(rs.getString("n_nombre"));
+                p.setN_descripcion(rs.getString("n_descripcion"));
+                p.setP_precio(rs.getInt("p_precio"));
+                p.setFk_categoria(rs.getInt("categoria"));
+                p.setN_cantidad(rs.getInt("n_cantidad"));
+                lista.add(p);
+            }
+            return lista;
+        } catch (SQLException e) {
+            System.out.println("ERROR EN PRODUCTO DAO LISTAR POR proveedor" + e);
+            return lista;
+        }
+    }
+
+    public List<Producto> ConsultarProductoClave(String clave) {
+        List<Producto> lista = new ArrayList<>();
+        String sql = "SELECT p.k_producto, p.fk_proveedor, p.n_nombre, p.n_descripcion, p.p_precio, p.fk_categoria, p.n_cantidad from PRODUCTO p, CATEGORIA c, PROVEEDOR pro\n"
+                + "WHERE p.fk_categoria = c.k_categoria\n"
+                + "AND p.fk_proveedor = pro.k_proveedor\n"
+                + "AND(\n"
+                + "	LOWER(p.n_nombre) LIKE '%"+clave+"%' OR\n"
+                + "	LOWER(p.n_descripcion) LIKE '%"+clave+"%' OR\n"
+                + "	LOWER(c.n_nombre) LIKE '%"+clave+"%' OR\n"
+                + "	LOWER(pro.n_proveedor) LIKE '%"+clave+"%' OR\n"
+                + "	LOWER(pro.c_correo) LIKE '%"+clave+"%'\n"
+                + ")";
+        try {
+            conn = cn.getConnection();
+            st = conn.prepareStatement(sql);
+
+            rs = st.executeQuery();
+            while (rs.next()) {
+                Producto p = new Producto();
+                p.setK_producto(rs.getString("k_producto"));
+                p.setFk_proveedor(rs.getInt("fk_proveedor"));
+                p.setN_nombre(rs.getString("n_nombre"));
+                p.setN_descripcion(rs.getString("n_descripcion"));
+                p.setP_precio(rs.getInt("p_precio"));
+                p.setFk_categoria(rs.getInt("fk_categoria"));
+                p.setN_cantidad(rs.getInt("n_cantidad"));
+                lista.add(p);
+                System.out.println("TAMAÑO LISTA "+ lista.size());
+            }
+            return lista;
+        } catch (SQLException e) {
+            System.out.println("ERROR EN llistar por palabra clave" + e);
+            return lista;
+        }
+    }
+    
+    
 }

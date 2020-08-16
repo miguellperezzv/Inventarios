@@ -7,11 +7,15 @@ package Controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Producto;
 import modelo.Proveedor;
+import modeloDAO.ProductoDAO;
 import modeloDAO.ProveedorDAO;
 
 /**
@@ -32,6 +36,7 @@ public class ControladorProveedor extends HttpServlet {
     
     Proveedor p = new Proveedor();
     ProveedorDAO dao = new ProveedorDAO();
+    ProductoDAO pdao =new ProductoDAO();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -61,6 +66,14 @@ public class ControladorProveedor extends HttpServlet {
             request.getRequestDispatcher("vistas/Proveedores.jsp").forward(request, response);
         }
         
+        if(accion.equalsIgnoreCase("buscar")){
+            String dato = request.getParameter("txtBuscar");
+            Proveedor prov = dao.ProveedorPorNombre(dato);
+            List<Producto> lista = pdao.ProductosPorProveedor(prov.getN_proveedor());
+            request.setAttribute("productos", lista);
+            request.setAttribute("prov", prov);
+            request.getRequestDispatcher("vistas/ConsultarProveedor.jsp").forward(request, response);
+        }
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");

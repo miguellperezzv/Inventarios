@@ -63,7 +63,7 @@ public class ProveedorDAO {
     }
     
     public Proveedor ProveedorPorNombre(String nombre){
-        String sql = "SELECT * FROM PROVEEDOR WHERE n_proveedor = '" +nombre+"'";
+        String sql = "SELECT * FROM PROVEEDOR WHERE LOWER(n_proveedor) LIKE '%"+nombre.toLowerCase()+"%' OR LOWER (c_correo) LIKE '%"+nombre.toLowerCase()+"%';";
         Proveedor p = new Proveedor();
         try {
             conn=cn.getConnection();
@@ -103,5 +103,22 @@ public class ProveedorDAO {
         return cantidad;
     }
     
+   public String ProveedorPorCodigo(int codigo){
+       String nombre="";
+       String sql = "SELECT n_proveedor FROM PROVEEDOR WHERE k_proveedor = "+codigo;
+       try {
+            conn=cn.getConnection();
+            st=conn.prepareStatement(sql);
+            System.out.println("LA SENTENCIA SQL ES :" +sql);
+            rs=st.executeQuery();
+            while(rs.next()){
+                nombre = rs.getString("n_proveedor");
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("Error en getCantidadProductos en DAO "+ ex);
+        }
+       return nombre;
+   }
    
 }
