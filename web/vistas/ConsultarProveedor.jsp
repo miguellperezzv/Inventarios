@@ -80,7 +80,7 @@
                     <td> ${p.getP_precio()}</td>
                     <td> ${daoCat.CategoriaPorCodigo(p.getFk_categoria())}</td>
                     <td> ${p.getN_cantidad()}</td>
-                    <td> <a href="#"><i class="fas fa-info-circle"></i></a></td>
+                    <td> <a href="ControladorProducto?accion=Detalle&k_producto=${p.getK_producto()}"><i class="fas fa-info-circle"></i></a></td>
                 </tr>
             </c:forEach>
 

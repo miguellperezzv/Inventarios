@@ -80,6 +80,35 @@ public class ProductoDAO implements CRUDProducto {
         }
 
     }
+    
+    public Producto ProductoPorCodigo(int codigo){
+        Producto p = new Producto();
+        String sql = "SELECT * FROM PRODUCTO WHERE K_PRODUCTO = "+codigo;
+        
+        try {
+            conn = cn.getConnection();
+            st = conn.prepareStatement(sql);
+            System.out.println("LA SENTENCIA SQL ES :" + sql);
+            rs = st.executeQuery();
+            
+            while (rs.next()) {
+                System.out.println(rs.getString("n_nombre"));
+                
+                p.setK_producto(rs.getString("k_producto"));
+                p.setN_nombre(rs.getString("n_nombre"));
+                p.setN_descripcion(rs.getString("n_descripcion"));
+                p.setP_precio(rs.getInt("p_precio"));
+                p.setFk_categoria(rs.getInt("fk_categoria"));
+                p.setFk_proveedor(rs.getInt("fk_proveedor"));
+                p.setN_disponibilidad(rs.getInt("n_disponibilidad"));
+                productos.add(p);
+            }
+        }
+        catch(SQLException e){
+            
+        }
+        return p;
+    }
 
     public ArrayList<Producto> getProductos() {
         return productos;
@@ -288,5 +317,40 @@ public class ProductoDAO implements CRUDProducto {
         }
     }
     
+    public String proveedorProducto(int codigo){
+        String proveedor = null;
+        String sql = "SELECT n_proveedor FROM PROVEEDOR WHERE k_proveedor="+codigo;
+        try{
+            conn = cn.getConnection();
+            st = conn.prepareStatement(sql);
+
+            rs = st.executeQuery();
+            while(rs.next()){
+                proveedor = rs.getString("n_proveedor");
+            }
+        }
+        catch(SQLException e){
+            System.out.println("ERROR EN llistar por proveedor por producto" + e);
+        }
+        return proveedor;
+    }
+    
+    public String categoriaProducto(int codigo){
+        String proveedor = null;
+        String sql = "SELECT n_NOMBRE FROM categoria WHERE k_categoria="+codigo;
+        try{
+            conn = cn.getConnection();
+            st = conn.prepareStatement(sql);
+
+            rs = st.executeQuery();
+            while(rs.next()){
+                proveedor = rs.getString("n_NOMBRE");
+            }
+        }
+        catch(SQLException e){
+            System.out.println("ERROR EN llistar por categoria por producto" + e);
+        }
+        return proveedor;
+    }
     
 }

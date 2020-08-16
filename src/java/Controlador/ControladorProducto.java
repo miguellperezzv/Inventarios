@@ -77,6 +77,14 @@ public class ControladorProducto extends HttpServlet {
             request.setAttribute("daoCat", new CategoriaDAO());
             request.getRequestDispatcher("vistas/ConsultarProducto.jsp").forward(request, response);
         }
+        if(accion.equals("Detalle")){
+            int k_producto = Integer.parseInt(request.getParameter("k_producto"));
+            Producto p = dao.ProductoPorCodigo(k_producto);
+            request.setAttribute("p", p);
+            request.setAttribute("dao", dao);
+            request.getRequestDispatcher("vistas/Producto.jsp").forward(request, response);
+            
+        }
 
         if (accion.equalsIgnoreCase("Registrar")) {
             System.out.print("ENTRANDO A CONTROLADOR PRODUCTO / REGISTRAR");
