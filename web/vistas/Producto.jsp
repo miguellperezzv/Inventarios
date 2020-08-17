@@ -39,14 +39,18 @@
                         </div> 
                     </h7>
                     <div>
-                        <a onClick="mostrar('Editar Producto');"  href="#" class="card-link"><i class="fas fa-pen" ></i> Editar Producto</a>
-                        <a onClick="mostrar('Registrar Stock');" href="#" class="card-link"> <i class="fas fa-boxes"></i> Agregar Stock</a> 
+                        <a onClick="mostrar('Editar Producto');"   class="card-link"><i class="fas fa-pen" ></i> Editar Producto</a>
+                        <a onClick="mostrar('Registrar Stock');"  class="card-link"> <i class="fas fa-boxes"></i> Agregar Stock</a> 
                     </div>
                 </div>
             </div>
     </center>
+    <br>
+    <br>
     
     
+    
+    <center><h3>Movimientos en el Stock para ${p.getN_nombre()}</h3></center>
     
     
     
@@ -80,7 +84,25 @@
             </div>
         </div>
     
-    
+    <!-- Modal Stocks -->
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Nueva Proveedor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div id="modal2">
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
     
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -91,7 +113,11 @@
                 $("#nav-placeholder").load("vistas/nav.jsp");
             });
         </script>
-        
+        <script>
+            $(function () {
+                $("#modal2").load("vistas/Stock.jsp");
+            });
+        </script>
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
         <script>
@@ -101,6 +127,10 @@
                     $('#myModal').modal('show');
 
                 } 
+                else if (id === "Registrar Stock") {
+                    //alert("NUEVO PROVEEDOR");
+                    $('#myModal2').modal('show');
+                }
             }
         </script>
     </body>

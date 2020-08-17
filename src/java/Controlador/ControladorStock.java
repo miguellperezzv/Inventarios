@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Movimiento;
+import modelo.Producto;
 import modelo.Tipotx;
 import modeloDAO.MovimientoDAO;
 import modeloDAO.ProductoDAO;
@@ -48,6 +49,8 @@ public class ControladorStock extends HttpServlet {
         String accion = request.getParameter("accion");
         
         if(accion.equalsIgnoreCase("Stock")){
+            int codigo = Integer.parseInt(request.getParameter("btnStock"));
+            request.setAttribute("codigo", codigo);
             request.getRequestDispatcher("vistas/Stock.jsp").forward(request, response);
         }
         
@@ -68,6 +71,7 @@ public class ControladorStock extends HttpServlet {
             m.setN_inout(inout);
             m.setN_descripcion(descripcion);
             
+            Producto p = daoProducto.ProductoPorCodigo(fk_producto);
             daoProducto.IngresarUnidades(fk_producto, unidades);
             dao.AgregarMovimento(m);
             request.getRequestDispatcher("vistas/Stock.jsp").forward(request, response);
