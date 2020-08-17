@@ -24,6 +24,10 @@
         <servlet-name>ContorladorTipotx</servlet-name>
         <servlet-class>Controlador.ControladorTipotx</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControladorTx</servlet-name>
+        <servlet-class>Controlador.ControladorTx</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controlador</servlet-name>
         <url-pattern>/Controlador</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>ContorladorTipotx</servlet-name>
         <url-pattern>/ContorladorTipotx</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorTx</servlet-name>
+        <url-pattern>/ControladorTx</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

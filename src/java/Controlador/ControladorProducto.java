@@ -16,8 +16,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Movimiento;
 import modelo.Producto;
 import modeloDAO.CategoriaDAO;
+import modeloDAO.MovimientoDAO;
 import modeloDAO.ProductoDAO;
 import modeloDAO.ProveedorDAO;
 
@@ -38,6 +40,7 @@ public class ControladorProducto extends HttpServlet {
      */
     ProductoDAO dao = new ProductoDAO();
     Producto p = new Producto();
+    MovimientoDAO txdao = new MovimientoDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -134,6 +137,7 @@ public class ControladorProducto extends HttpServlet {
             Boolean correcto = dao.editarProducto(k_producto, n_nombre, n_descripcion, p_precio);
             System.out.println("validez de correcto es "+ correcto);
             Producto p = dao.ProductoPorCodigo(k_producto);
+            List<Movimiento> txs = txdao.MovimientosProducto(k_producto);
             request.setAttribute("p", p);
             request.setAttribute("dao", dao);
             request.getRequestDispatcher("vistas/Producto.jsp").forward(request, response);

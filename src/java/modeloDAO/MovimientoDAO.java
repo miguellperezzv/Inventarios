@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import modelo.Movimiento;
 
 /**
@@ -57,6 +59,29 @@ public class MovimientoDAO {
             System.out.println("ERROR EN getCantidadTx() en Movimientodao "+ e);
             return cantidad;
         }
+    }
+
+    public List<Movimiento> MovimientosProducto(int k_producto) {
+        List<Movimiento> lista = new ArrayList<>();
+        String sql = "SELECT * FROM MOVIMIENTO WHERE fk_producto="+k_producto;
+        try{
+            conn = cn.getConnection();
+            st = conn.prepareStatement(sql);
+            rs =st.executeQuery();
+            while(rs.next()){
+               Movimiento m = new Movimiento();
+               m.setK_tx(rs.getInt("k_tx"));
+               m.setFk_usuario(rs.getInt("fk_usuario"));
+               m.setFk_producto(rs.getInt("fk_producto"));
+               m.setFk_tipo(rs.getInt("fk_tipotx"));
+               
+            }
+            
+        }catch (SQLException e){
+            System.out.println("ERROR EN txs por producto "+ e);
+            
+        }
+        return lista;
     }
 
    

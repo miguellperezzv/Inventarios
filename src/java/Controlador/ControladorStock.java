@@ -49,8 +49,8 @@ public class ControladorStock extends HttpServlet {
         String accion = request.getParameter("accion");
         
         if(accion.equalsIgnoreCase("Stock")){
-            int codigo = Integer.parseInt(request.getParameter("btnStock"));
-            request.setAttribute("codigo", codigo);
+            //int codigo = Integer.parseInt(request.getParameter("btnStock"));
+            //request.setAttribute("codigo", codigo);
             request.getRequestDispatcher("vistas/Stock.jsp").forward(request, response);
         }
         
