@@ -122,6 +122,22 @@ public class ControladorProducto extends HttpServlet {
             }
 
         }
+        
+        if(accion.equals("Editar Producto")){
+            
+            //
+            
+            int k_producto = Integer.parseInt(request.getParameter("txtCodigo"));
+            String n_nombre = request.getParameter("txtNombre");
+            String n_descripcion = request.getParameter("txtDescripcion");
+            int p_precio = Integer.parseInt(request.getParameter("txtPrecio"));
+            Boolean correcto = dao.editarProducto(k_producto, n_nombre, n_descripcion, p_precio);
+            System.out.println("validez de correcto es "+ correcto);
+            Producto p = dao.ProductoPorCodigo(k_producto);
+            request.setAttribute("p", p);
+            request.setAttribute("dao", dao);
+            request.getRequestDispatcher("vistas/Producto.jsp").forward(request, response);
+        }
 
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
