@@ -63,7 +63,7 @@ public class MovimientoDAO {
 
     public List<Movimiento> MovimientosProducto(int k_producto) {
         List<Movimiento> lista = new ArrayList<>();
-        String sql = "SELECT * FROM MOVIMIENTO WHERE fk_producto="+k_producto;
+        String sql = "SELECT * FROM MOVIMIENTO WHERE fk_producto="+k_producto+" order by f_movimiento DESC";
         try{
             conn = cn.getConnection();
             st = conn.prepareStatement(sql);
@@ -74,7 +74,15 @@ public class MovimientoDAO {
                m.setFk_usuario(rs.getInt("fk_usuario"));
                m.setFk_producto(rs.getInt("fk_producto"));
                m.setFk_tipo(rs.getInt("fk_tipotx"));
+               m.setN_inout(rs.getInt("n_inout"));
                
+               if(rs.getString("n_descripcion")==null){
+                   m.setN_descripcion(" " );
+               }else{
+                   m.setN_descripcion(rs.getString("n_descripcion"));
+               }
+               m.setF_movimiento(rs.getTimestamp("f_movimiento"));
+               lista.add(m);
             }
             
         }catch (SQLException e){

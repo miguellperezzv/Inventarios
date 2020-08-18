@@ -68,7 +68,7 @@ public class ControladorProveedor extends HttpServlet {
         }
         
         if(accion.equalsIgnoreCase("buscar")){
-            String dato = request.getParameter("txtBuscar");
+            String dato =  request.getParameter("txtBuscar").toLowerCase();
             Proveedor prov = dao.ProveedorPorNombre(dato);
             List<Producto> lista = pdao.ProductosPorProveedor(prov.getN_proveedor());
             request.setAttribute("lista", lista);

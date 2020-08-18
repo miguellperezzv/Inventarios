@@ -4,6 +4,7 @@
     Author     : luisy
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -51,34 +52,42 @@
 
 
     <center><h3>Movimientos en el Stock para ${p.getN_nombre()}</h3></center>
+    <br>
+    <c:if test="${txs.size() == 0}">
+        <center> <h6>No hay movimientos para el producto en la bodega</h6> </center>
+    </c:if>
+    <c:if test="${txs.size()> 0}">
+        <div class="container-sm border"  >
+            <table class="table table-borderless table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">in/out</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var = "t" items = "${txs}">
+                        <tr>
+                            <th scope="row">${t.getK_tx()}</th>
+                            <td> ${t.getFk_usuario()} </td>
+                            <td>${t.getFk_producto()}</td>
+                            <td>${t.getFk_tipo()}</td>
+                            <td>${t.getN_inout()}</td>
+                            <td>${t.getN_descripcion()}</td>
+                            <td>${t.getF_movimiento()}</td>
+                        </tr>
+                    </c:forEach>  
+                </tbody>
+            </table>
+        </div>
+    </c:if>
 
-    <div class="container-sm border" >
-        <table class="table table-borderless table-dark">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Usuario</th>
-                    <th scope="col">Producto</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">in/out</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col">Fecha</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                
-            </tbody>
-        </table>
-    </div>
+
     <!-- Modal  editar producto-->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -140,7 +149,7 @@
     </script>
     <script>
         $(function () {
-           // $("#modal2").load("vistas/Stock.jsp");
+            // $("#modal2").load("vistas/Stock.jsp");
         });
     </script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>

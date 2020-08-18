@@ -85,6 +85,8 @@ public class ControladorProducto extends HttpServlet {
             Producto p = dao.ProductoPorCodigo(k_producto);
             request.setAttribute("p", p);
             request.setAttribute("dao", dao);
+            List<Movimiento> txs = txdao.MovimientosProducto(k_producto);
+            request.setAttribute("txs", txs);
             request.getRequestDispatcher("vistas/Producto.jsp").forward(request, response);
             
         }
@@ -137,9 +139,11 @@ public class ControladorProducto extends HttpServlet {
             Boolean correcto = dao.editarProducto(k_producto, n_nombre, n_descripcion, p_precio);
             System.out.println("validez de correcto es "+ correcto);
             Producto p = dao.ProductoPorCodigo(k_producto);
-            List<Movimiento> txs = txdao.MovimientosProducto(k_producto);
+            
+            
             request.setAttribute("p", p);
             request.setAttribute("dao", dao);
+            
             request.getRequestDispatcher("vistas/Producto.jsp").forward(request, response);
         }
 

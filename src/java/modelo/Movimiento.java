@@ -5,6 +5,9 @@
  */
 package modelo;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 /**
  *
  * @author luisy
@@ -17,6 +20,7 @@ public class Movimiento {
     int fk_tipo;
     int n_inout;
     String n_descripcion;
+    Timestamp f_movimiento;
 
     public Movimiento() {
     }
@@ -67,6 +71,13 @@ public class Movimiento {
 
     public void setN_descripcion(String n_descripcion) {
         this.n_descripcion = n_descripcion;
+    }
+
+    public Timestamp getF_movimiento(){
+        return f_movimiento;
+    }
+    public void setF_movimiento(Timestamp date) {
+        this.f_movimiento = date;
     }
     
     
