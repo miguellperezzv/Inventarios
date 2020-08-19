@@ -70,7 +70,7 @@
                         <div class="card w-70" style="height:100px;">
                             <div class="card-body">
 
-                                <h7 class="card-text"><b> ${txdao.getNombre(tx.getK_tx())} a ${txdao.getProductoNombre(tx.getK_tx())} </b> : ${txdao.getINOUT(tx.getN_inout())} bodega por ${txdao.getTipo(tx.getK_tx())}</h7>
+                                <h7 class="card-text"><b> ${txdao.getNombre(tx.getK_tx())} a <a href="ControladorProducto?accion=Detalle&k_producto=${tx.getFk_producto()}"> ${txdao.getProductoNombre(tx.getK_tx())}</a> </b> : ${txdao.getINOUT(tx.getN_inout())} bodega por ${txdao.getTipo(tx.getK_tx())}</h7>
                                 <br>
                                 <center><h8 style="font-size: 10px; color: #0F4C81"> <b>${tx.getF_movimiento()}</b></h8></center>
                             </div>
@@ -79,15 +79,15 @@
 
 
                 </div>
-                <div class="por-agotarse" style="margin-left: 5px;">
-                    <center> <h4>Productos por Agotarse</h4> </center>
-
+                <div class="por-agotarse" style="margin-left: 10px;">
+                    
+                    
 
                     <div class="row">
 
 
                         <c:forEach var = "l" items = "${lista}" >
-                            <div class="col-lg-6">
+                            <div class="col-lg-6" style="width: 100px;">
 
                                 <div class="card-body">
                                     <center>
@@ -97,13 +97,13 @@
 
                                 </div>
                                 <div class="card-footer ">
-                                    <center> <input class="btn btn-danger btn-block" type="submit" href="ControladorProducto?accion=Detalle&k_producto=${l.getK_producto()}" value="Ir al producto"> </center>
+                                    <center> <a  href="ControladorProducto?accion=Detalle&k_producto=${l.getK_producto()}">Ir al Producto</a> </center>
 
                                 </div>
                             </div>
                         </c:forEach>
 
-                        <br>
+                        
 
                     </div>
 

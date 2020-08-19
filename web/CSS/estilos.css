@@ -105,11 +105,13 @@ h1{
  
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1.1fr 2.2fr 0.2fr 0.5fr 1fr 1fr;
-  grid-template-rows: 1fr 1.1fr 0.9fr 0.1fr 5.4fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1.6fr 0.4fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 0.1fr 2.3fr 1fr 1fr;
   gap: 1px 1px;
   grid-template-areas: "BIENVENIDO BIENVENIDO BIENVENIDO BODEGA BODEGA BODEGA BODEGA" "BIENVENIDO BIENVENIDO BIENVENIDO BODEGA BODEGA BODEGA BODEGA" "BIENVENIDO BIENVENIDO BIENVENIDO BODEGA BODEGA BODEGA BODEGA" "BIENVENIDO BIENVENIDO BIENVENIDO BODEGA BODEGA BODEGA BODEGA" "ultimas-tx ultimas-tx ultimas-tx por-agotarse por-agotarse por-agotarse por-agotarse" "ultimas-tx ultimas-tx ultimas-tx por-agotarse por-agotarse por-agotarse por-agotarse" "ultimas-tx ultimas-tx ultimas-tx por-agotarse por-agotarse por-agotarse por-agotarse";
 }
+
+.BIENVENIDO { grid-area: BIENVENIDO; }
 
 .BODEGA {
   display: grid;
@@ -130,13 +132,4 @@ h1{
 
 .ultimas-tx { grid-area: ultimas-tx; }
 
-.por-agotarse {
-  display: grid;
-  grid-template-columns: 1.1fr 0.8fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 1px 1px;
-  grid-template-areas: ". . ." ". . .";
-  grid-area: por-agotarse;
-}
-
-.BIENVENIDO { grid-area: BIENVENIDO; }
+.por-agotarse { grid-area: por-agotarse; }

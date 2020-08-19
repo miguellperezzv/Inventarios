@@ -101,6 +101,7 @@ public class ProductoDAO implements CRUDProducto {
                 p.setFk_categoria(rs.getInt("fk_categoria"));
                 p.setFk_proveedor(rs.getInt("fk_proveedor"));
                 p.setN_disponibilidad(rs.getInt("n_disponibilidad"));
+                p.setN_cantidad(rs.getInt("n_cantidad"));
                 productos.add(p);
             }
         } catch (SQLException e) {

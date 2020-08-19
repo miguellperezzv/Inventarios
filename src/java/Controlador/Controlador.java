@@ -19,7 +19,6 @@ import modeloDAO.MovimientoDAO;
 import modeloDAO.ProductoDAO;
 import modeloDAO.UsuarioDAO;
 
-
 /**
  *
  * @author personal
@@ -35,85 +34,82 @@ public class Controlador extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     UsuarioDAO dao = new UsuarioDAO();
     Usuario u = new Usuario();
     MovimientoDAO txdao = new MovimientoDAO();
-    ProductoDAO pdao=new ProductoDAO();
-    
+    ProductoDAO pdao = new ProductoDAO();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        String accion = request.getParameter("accion");  
-        if(accion.equals("ingresar")){ 
-            
-            
-            
+
+        String accion = request.getParameter("accion");
+        if (accion.equals("ingresar")) {
+
             //PRUEBA CONTROLADOR
-            boolean validez =false;
+            boolean validez = false;
             String cod = request.getParameter("txtCodigo");
-            System.out.println("codigo "+ cod);
+            System.out.println("codigo " + cod);
             String con = request.getParameter("txtContrasena");
-            System.out.println("p "+ con);
+            System.out.println("p " + con);
             u.setK_usuario((cod));
             u.setK_contrasena(con);
-            
-            
-            validez=dao.validar(u);
-            System.out.print("DAO VALIDAR "+ validez);
-            
-           
-            
-            if(validez==true){
-                
-                
+
+            validez = dao.validar(u);
+            System.out.print("DAO VALIDAR " + validez);
+
+            if (validez == true) {
+
                 request.getSession().setAttribute("cod", cod);
                 List<Movimiento> txs = txdao.ultimosMovimientos();
-                List<Producto> lista = pdao.agotados(); 
+                List<Producto> lista = pdao.agotados();
                 request.setAttribute("txs", txs);
                 request.setAttribute("txdao", txdao);
                 request.setAttribute("pdao", new ProductoDAO());
                 request.setAttribute("lista", lista);
-                request.getRequestDispatcher("vistas/principal.jsp").forward(request,response);
-                
-                
-                
-            }
-            else{
+                request.getRequestDispatcher("vistas/principal.jsp").forward(request, response);
+
+            } else {
                 request.setAttribute("validez", validez);
-                request.getRequestDispatcher("index.jsp").forward(request,response); 
+                request.getRequestDispatcher("index.jsp").forward(request, response);
             }
-            
+
             //request.getSession().setAttribute("nom", "Usuario");
             //request.getSession().setAttribute("correo", "miguel@gmail.com");
             //System.out.println("ENTRANDO AL CONTROLADOR Y ENVIANDO PRINCIPAL.JSP");
             //request.getRequestDispatcher("vistas/principal.jsp").forward(request,response);
-            
         }
-        if(accion.equals("Salir")){
-            request.getRequestDispatcher("index.jsp").forward(request,response);
+        if (accion.equals("Salir")) {
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
-        
-        if(accion.equals("Home")){
+
+        if (accion.equals("Home")) {
+
+            List<Movimiento> txs = txdao.ultimosMovimientos();
+            List<Producto> lista = pdao.agotados();
+            request.setAttribute("txs", txs);
+            request.setAttribute("txdao", txdao);
+            request.setAttribute("pdao", new ProductoDAO());
+            request.setAttribute("lista", lista);
+           // request.getRequestDispatcher("vistas/principal.jsp").forward(request, response);
             request.getRequestDispatcher("vistas/principal.jsp").forward(request, response);
         }
-        if(accion.equals("menu")){
+        if (accion.equals("menu")) {
             request.getSession().setAttribute("nom", u.getN_nombre());
             request.getSession().setAttribute("correo", u.getN_email());
         }
-        if(accion.equals("seleccionar")){
+        if (accion.equals("seleccionar")) {
             request.getSession().setAttribute("opc1", "Opcion1");
             request.getSession().setAttribute("opc2", "Opcion2");
             request.getSession().setAttribute("opc3", "Opcion3");
         }
-        
+
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Controlador</title>");            
+            out.println("<title>Servlet Controlador</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Controlador at " + request.getContextPath() + "</h1>");
@@ -145,7 +141,6 @@ public class Controlador extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -157,7 +152,6 @@ public class Controlador extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-    
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>

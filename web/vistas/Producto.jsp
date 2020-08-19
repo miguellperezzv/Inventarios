@@ -49,7 +49,14 @@
     <br>
     <br>
 
-
+     
+        
+        <c:if test="${validez == true}">
+                    
+                    <div class="alert alert-danger" style="margin-right: 100px; margin-left: 100px;" role="alert">
+                       El producto se actualizó correctamente. .
+                    </div>
+        </c:if>
 
     <center><h3>Movimientos en el Stock para ${p.getN_nombre()}</h3></center>
     <br>
@@ -76,8 +83,8 @@
                             <th scope="row">${t.getK_tx()}</th>
                             <td> ${t.getFk_usuario()} </td>
                             <td>${t.getFk_producto()}</td>
-                            <td>${t.getFk_tipo()}</td>
-                            <td>${t.getN_inout()}</td>
+                            <td>${txdao.getTipo(t.getK_tx())}</td>
+                            <td>${txdao.getINOUT(t.getN_inout())}</td>
                             <td>${t.getN_descripcion()}</td>
                             <td>${t.getF_movimiento()}</td>
                         </tr>

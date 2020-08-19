@@ -41,6 +41,7 @@ public class ControladorProducto extends HttpServlet {
     ProductoDAO dao = new ProductoDAO();
     Producto p = new Producto();
     MovimientoDAO txdao = new MovimientoDAO();
+    
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -87,6 +88,7 @@ public class ControladorProducto extends HttpServlet {
             request.setAttribute("dao", dao);
             List<Movimiento> txs = txdao.MovimientosProducto(k_producto);
             request.setAttribute("txs", txs);
+            request.setAttribute("txdao", txdao);
             request.getRequestDispatcher("vistas/Producto.jsp").forward(request, response);
             
         }
@@ -143,7 +145,10 @@ public class ControladorProducto extends HttpServlet {
             
             request.setAttribute("p", p);
             request.setAttribute("dao", dao);
-            
+            request.setAttribute("validez", correcto);
+            List<Movimiento> txs = txdao.MovimientosProducto(k_producto);
+            request.setAttribute("txs", txs);
+            request.setAttribute("txdao", txdao);
             request.getRequestDispatcher("vistas/Producto.jsp").forward(request, response);
         }
 
