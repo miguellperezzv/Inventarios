@@ -12,7 +12,7 @@ import modelo.Usuario;
  * @author personal
  */
 public interface Validar {
-    public int validar(Usuario usuario);
+    public boolean validar(Usuario usuario);
 }
 
 

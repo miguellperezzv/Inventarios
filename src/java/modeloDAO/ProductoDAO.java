@@ -346,6 +346,75 @@ public class ProductoDAO implements CRUDProducto {
         return proveedor;
     }
 
+    public int cantidadProductos(){
+        String sql = "SELECT COUNT(*) FROM PRODUCTO";
+        int cant=0;
+        try {
+            conn = cn.getConnection();
+            st = conn.prepareStatement(sql);
+
+            rs = st.executeQuery();
+            while (rs.next()) {
+                cant = rs.getInt("COUNT");
+            }
+        } catch (SQLException e) {
+            System.out.println("ERROR EN llistar CANTIDAD" + e);
+        }
+        return cant;
+    }
+    
+    
+   public int cantidadCategorias(){
+       String sql = "SELECT COUNT(*) FROM CATEGORIA";
+        int cant=0;
+        try {
+            conn = cn.getConnection();
+            st = conn.prepareStatement(sql);
+
+            rs = st.executeQuery();
+            while (rs.next()) {
+                cant = rs.getInt("COUNT");
+            }
+        } catch (SQLException e) {
+            System.out.println("ERROR EN llistar CANTIDAD" + e);
+        }
+        return cant;
+   }
+   
+   public int cantidadProveedor(){
+       String sql = "SELECT COUNT(*) FROM Proveedor";
+        int cant=0;
+        try {
+            conn = cn.getConnection();
+            st = conn.prepareStatement(sql);
+
+            rs = st.executeQuery();
+            while (rs.next()) {
+                cant = rs.getInt("COUNT");
+            }
+        } catch (SQLException e) {
+            System.out.println("ERROR EN llistarprove" + e);
+        }
+        return cant;
+   }
+   
+   public int cantidadUsuario(){
+       String sql = "SELECT COUNT(*) FROM USUARIO";
+        int cant=0;
+        try {
+            conn = cn.getConnection();
+            st = conn.prepareStatement(sql);
+
+            rs = st.executeQuery();
+            while (rs.next()) {
+                cant = rs.getInt("COUNT");
+            }
+        } catch (SQLException e) {
+            System.out.println("ERROR EN llistarprove" + e);
+        }
+        return cant;
+   }
+   
     public Boolean editarProducto(int k_producto, String n_nombre, String n_descripcion, int p_precio) {
         boolean b = false;
         String sql = "UPDATE producto\n"

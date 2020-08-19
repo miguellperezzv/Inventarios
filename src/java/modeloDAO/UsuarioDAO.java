@@ -22,7 +22,8 @@ public class UsuarioDAO implements Validar {
     int r=0;
     
     @Override
-    public int validar(Usuario u) {
+    public boolean validar(Usuario u) {
+        boolean validez = false;
         String sql = "SELECT * FROM USUARIO WHERE k_usuario="+u.getK_usuario()+ " AND k_contrasena='"+u.getK_contrasena()+"'";
         try{
             conn=cn.getConnection();
@@ -34,20 +35,15 @@ public class UsuarioDAO implements Validar {
             
             rs=st.executeQuery();
             while(rs.next()){
-                r++;
+                validez= true;
                 u.setK_usuario((rs.getString("k_usuario")));
                 u.setK_contrasena(rs.getString("k_contrasena"));
                 System.out.println("USUARIO DAO "+u.getK_usuario());
             }
-            if(r>1){
-                return 1;
-            }
-            else{
-                return 0;
-            }
+            return validez;
         }catch(SQLException e){
             System.out.println("ERORR EN DAOVALIDAR "+ e);
-            return -1;
+            return validez;
         }
     }
 

@@ -7,11 +7,15 @@ package Controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Movimiento;
 import modelo.Usuario;
+import modeloDAO.MovimientoDAO;
+import modeloDAO.ProductoDAO;
 import modeloDAO.UsuarioDAO;
 
 
@@ -33,7 +37,7 @@ public class Controlador extends HttpServlet {
     
     UsuarioDAO dao = new UsuarioDAO();
     Usuario u = new Usuario();
-    
+    MovimientoDAO txdao = new MovimientoDAO();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -45,7 +49,7 @@ public class Controlador extends HttpServlet {
             
             
             //PRUEBA CONTROLADOR
-            int r;
+            boolean validez =false;
             String cod = request.getParameter("txtCodigo");
             System.out.println("codigo "+ cod);
             String con = request.getParameter("txtContrasena");
@@ -54,18 +58,27 @@ public class Controlador extends HttpServlet {
             u.setK_contrasena(con);
             
             
-            r=dao.validar(u);
-            System.out.print("DAO VALIDAR "+ r);
+            validez=dao.validar(u);
+            System.out.print("DAO VALIDAR "+ validez);
             
-            if(r==1){
+           
+            
+            if(validez==true){
+                
+                
                 request.getSession().setAttribute("cod", cod);
+                List<Movimiento> txs = txdao.ultimosMovimientos();
+                request.setAttribute("txs", txs);
+                request.setAttribute("txdao", txdao);
+                request.setAttribute("pdao", new ProductoDAO());
                 request.getRequestDispatcher("vistas/principal.jsp").forward(request,response);
+                
+                
+                
             }
             else{
-                request.getRequestDispatcher("index.jsp").forward(request,response);
-                
-                
-                
+                request.setAttribute("validez", validez);
+                request.getRequestDispatcher("index.jsp").forward(request,response); 
             }
             
             //request.getSession().setAttribute("nom", "Usuario");

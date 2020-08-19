@@ -102,3 +102,29 @@ h1{
      font-family: Impact;
      
  }
+ 
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 1px 1px;
+  grid-template-areas: "ultimas-tx ultimas-tx ultimas-tx productos productos proveedores proveedores" "ultimas-tx ultimas-tx ultimas-tx categorias categorias proveedores proveedores" "ultimas-tx ultimas-tx ultimas-tx imagen imagen usuarios usuarios" "ultimas-tx ultimas-tx ultimas-tx imagen imagen usuarios usuarios" "ultimas-tx ultimas-tx ultimas-tx por-agotarse por-agotarse por-agotarse por-agotarse" "ultimas-tx ultimas-tx ultimas-tx por-agotarse por-agotarse por-agotarse por-agotarse" "ultimas-tx ultimas-tx ultimas-tx por-agotarse por-agotarse por-agotarse por-agotarse";
+}
+
+.ultimas-tx { grid-area: ultimas-tx; }
+
+.por-agotarse { grid-area: por-agotarse; }
+
+.productos { grid-area: productos; }
+
+.categorias { grid-area: categorias; }
+
+.proveedores { grid-area: proveedores; }
+
+.imagen { grid-area: imagen; }
+
+.usuarios { grid-area: usuarios; }
+
+
+
+

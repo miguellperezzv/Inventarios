@@ -13,31 +13,41 @@ and open the template in the editor.
         <link href="WEB-INF/CSS/estilos.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        
+
+
+
         <div class ="container col-lg-5" margin-top="50px" top="50px">
-        <form action="Controlador"> 
-            <p font-size="40 px">Mi Inventario</p>
+            <form action="Controlador"> 
+                <h3 font-size="40 px">Mi Inventario</h3>
                 <p>Control</p>
-        
-        <div class="form-group">
-            <label>Codigo:</label>
-            <input class="form-control" type="text" name="txtCodigo" placeholder="Ingrese su código">
-                
-        </div>
-        <div class="form-group">
-            <label>Contraseña:</label>
-             <input class="form-control" type="password" name="txtContrasena" placeholder="Ingrese su contraseña">
-        </div>
-        <input class="btn btn-danger btn-block" type="submit" name="accion" value="ingresar" >
-        
+
+                <div class="form-group">
+                    <label>Codigo:</label>
+                    <input class="form-control" type="text" name="txtCodigo" placeholder="Ingrese su código">
+
+                </div>
+                <div class="form-group">
+                    <label>Contraseña:</label>
+                    <input class="form-control" type="password" name="txtContrasena" placeholder="Ingrese su contraseña">
+                </div>
+                <input class="btn btn-danger btn-block" type="submit" name="accion" value="ingresar" >
+                <br>
+                <br>
+                <c:if test="${validez == false}">
+                    <center> <h6>Datos Incorrectos</h6> </center>
+                    <div class="alert alert-danger" role="alert">
+                       Datos Incorrectos, intente nuevamente. <a href="#" class="alert-link">Recuperar Mi contraseña</a>.
+                    </div>
+                </c:if>
+
             </form>
-    </div>
-        
+        </div>
+
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    
-    
-    
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+
+
     </body>
 </html>

@@ -15,7 +15,9 @@
     <form action="ControladorStock"> 
 
         <div class="form-group">
-
+            
+            
+            
             <label >Código:
                 <input class="form-control" type="numeric" name="txtCodigo"> </label>
             <label >Unidades:
