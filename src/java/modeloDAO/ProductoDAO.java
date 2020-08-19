@@ -387,7 +387,6 @@ public class ProductoDAO implements CRUDProducto {
         try {
             conn = cn.getConnection();
             st = conn.prepareStatement(sql);
-
             rs = st.executeQuery();
             while (rs.next()) {
                 cant = rs.getInt("COUNT");
@@ -434,6 +433,28 @@ public class ProductoDAO implements CRUDProducto {
             b=false;
         }
         return b;
+    }
+
+    public List<Producto> agotados() {
+        
+        List<Producto> lista = new ArrayList<>();
+        String sql = "SELECT * FROM PRODUCTO  WHERE n_cantidad <3 LIMIT 9";
+        try {
+            conn = cn.getConnection();
+            st = conn.prepareStatement(sql);
+            rs = st.executeQuery();
+            while (rs.next()) {
+               Producto p = new Producto();
+               p.setK_producto(rs.getString("k_producto"));
+               p.setN_nombre(rs.getString("n_nombre"));
+               p.setN_cantidad(rs.getInt("n_cantidad"));
+               lista.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("ERROR EN llistarprove" + e);
+        }
+        
+        return lista ;
     }
 
 }

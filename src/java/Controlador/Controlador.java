@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Movimiento;
+import modelo.Producto;
 import modelo.Usuario;
 import modeloDAO.MovimientoDAO;
 import modeloDAO.ProductoDAO;
@@ -38,6 +39,7 @@ public class Controlador extends HttpServlet {
     UsuarioDAO dao = new UsuarioDAO();
     Usuario u = new Usuario();
     MovimientoDAO txdao = new MovimientoDAO();
+    ProductoDAO pdao=new ProductoDAO();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -68,9 +70,11 @@ public class Controlador extends HttpServlet {
                 
                 request.getSession().setAttribute("cod", cod);
                 List<Movimiento> txs = txdao.ultimosMovimientos();
+                List<Producto> lista = pdao.agotados(); 
                 request.setAttribute("txs", txs);
                 request.setAttribute("txdao", txdao);
                 request.setAttribute("pdao", new ProductoDAO());
+                request.setAttribute("lista", lista);
                 request.getRequestDispatcher("vistas/principal.jsp").forward(request,response);
                 
                 

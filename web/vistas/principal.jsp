@@ -22,13 +22,48 @@
 
         </div>
 
-        <section id="text1" class="section mt-1 text-center">
-            <h1> Bienvenido al sistema de inventarios <strong> ${nom}</strong></h1>
-        </section> 
+
+
+
+
         <div class="container-sm">
             <div class="grid-container">
-                <div class="ultimas-tx">
+                <div class="BIENVENIDO">
+                    <center> <h4>Bienvenido</h4> </center>
+                    <center><img src="https://www.clipartkey.com/mpngs/m/138-1387305_inventory-icon-white-png-clipart-png-download-vector.png" height="300px" width="300px"> </center>
+                </div>
+                <div class="BODEGA">
 
+                    <div class="proveedores">
+                        <br>
+                        <center> <label><h4> <i class="fas fa-truck" style="color: #0F4C81; size: 100px;" ></i> : ${Integer.toString(pdao.cantidadProveedor())}</h4></label></center>
+                        <center><h8 style="font-size: 15px; color: #0F4C81"> <b>Proveedor</b></h8></center>
+
+
+
+                    </div>
+                    <div class="productos">
+
+                        <br>
+                        <center> <label><h4> <i class="fas fa-box" style="color: #0F4C81; size: 100px;" ></i> : ${Integer.toString(pdao.cantidadProductos())}</h4></label></center>
+                        <center><h8 style="font-size: 15px; color: #0F4C81"> <b>Productos</b></h8></center>
+
+                    </div>
+                    <div class="categorias">
+
+                        <center> <label><h4> <i class="fas fa-tag" style="color: #0F4C81; size: 100px;" ></i> : ${Integer.toString(pdao.cantidadCategorias())}</h4></label></center>
+                        <center><h8 style="font-size: 15px; color: #0F4C81"> <b>Categorias</b></h8></center>
+
+                    </div>
+                    <div class="usuarios">
+
+                        <center> <label><h4> <i class="fas fa-user-circle" style="color: #0F4C81; size: 100px;" ></i> : ${Integer.toString(pdao.cantidadUsuario())}</h4></label></center>
+                        <center><h8 style="font-size: 15px; color: #0F4C81"> <b>Usuarios</b></h8></center>
+
+
+                    </div>
+                </div>
+                <div class="ultimas-tx">
                     <center> <h4>Últimos Movimientos en la Bodega</h4> </center>
 
                     <c:forEach var = "tx" items = "${txs}">
@@ -42,56 +77,54 @@
                         </div>
                     </c:forEach>
 
-                </div>
-                <div class="por-agotarse">por agotarse</div>
-                <div class="productos"> 
-                    <br><br>
-                    <center> <label><h4> <i class="fas fa-box" style="color: #0F4C81; size: 100px;" ></i> : ${Integer.toString(pdao.cantidadProductos())}</h4></label></center>
-                    <center><h8 style="font-size: 15px; color: #0F4C81"> <b>Productos</b></h8></center>
 
                 </div>
-                <div class="categorias">
-                    <br><br>
-                        <center> <label><h4> <i class="fas fa-tag" style="color: #0F4C81; size: 100px;" ></i> : ${Integer.toString(pdao.cantidadCategorias())}</h4></label></center>
-                    <center><h8 style="font-size: 15px; color: #0F4C81"> <b>Categorias</b></h8></center>
+                <div class="por-agotarse" style="margin-left: 5px;">
+                    <center> <h4>Productos por Agotarse</h4> </center>
 
 
-
-                </div>
-                <div class="proveedores">
-                    <br><br>
-                        <center> <label><h4> <i class="fas fa-truck" style="color: #0F4C81; size: 100px;" ></i> : ${Integer.toString(pdao.cantidadProveedor())}</h4></label></center>
-                    <center><h8 style="font-size: 15px; color: #0F4C81"> <b>Proveedor</b></h8></center>
+                    <div class="row">
 
 
-                </div>
-                <div class="imagen">imagen</div>
-                <div class="usuarios">
-                <br><br>
-                        <center> <label><h4> <i class="fas fa-user-circle" style="color: #0F4C81; size: 100px;" ></i> : ${Integer.toString(pdao.cantidadUsuario())}</h4></label></center>
-                    <center><h8 style="font-size: 15px; color: #0F4C81"> <b>Usuarios</b></h8></center>
+                        <c:forEach var = "l" items = "${lista}" >
+                            <div class="col-lg-6">
 
-                
+                                <div class="card-body">
+                                    <center>
+                                        <a> ${l.getN_nombre()} : ${l.getN_cantidad()}</a>
+                                       
+                                    </center>
+
+                                </div>
+                                <div class="card-footer ">
+                                    <center> <input class="btn btn-danger btn-block" type="submit" href="ControladorProducto?accion=Detalle&k_producto=${l.getK_producto()}" value="Ir al producto"> </center>
+
+                                </div>
+                            </div>
+                        </c:forEach>
+
+                        <br>
+
+                    </div>
+
                 </div>
             </div>
 
 
         </div>
-    </div>
-
-</div>
 
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-<script src="//code.jquery.com/jquery.min.js"></script>
-<script>
-    $(function () {
-        $("#nav-placeholder").load("vistas/nav.jsp");
-    });
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <script src="//code.jquery.com/jquery.min.js"></script>
+        <script>
+            $(function () {
+                $("#nav-placeholder").load("vistas/nav.jsp");
+            });
 
 
-</script>
-</body>
+        </script>
+    </body>
 </html>

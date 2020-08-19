@@ -105,26 +105,38 @@ h1{
  
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1.1fr 2.2fr 0.2fr 0.5fr 1fr 1fr;
+  grid-template-rows: 1fr 1.1fr 0.9fr 0.1fr 5.4fr 1fr 1fr;
   gap: 1px 1px;
-  grid-template-areas: "ultimas-tx ultimas-tx ultimas-tx productos productos proveedores proveedores" "ultimas-tx ultimas-tx ultimas-tx categorias categorias proveedores proveedores" "ultimas-tx ultimas-tx ultimas-tx imagen imagen usuarios usuarios" "ultimas-tx ultimas-tx ultimas-tx imagen imagen usuarios usuarios" "ultimas-tx ultimas-tx ultimas-tx por-agotarse por-agotarse por-agotarse por-agotarse" "ultimas-tx ultimas-tx ultimas-tx por-agotarse por-agotarse por-agotarse por-agotarse" "ultimas-tx ultimas-tx ultimas-tx por-agotarse por-agotarse por-agotarse por-agotarse";
+  grid-template-areas: "BIENVENIDO BIENVENIDO BIENVENIDO BODEGA BODEGA BODEGA BODEGA" "BIENVENIDO BIENVENIDO BIENVENIDO BODEGA BODEGA BODEGA BODEGA" "BIENVENIDO BIENVENIDO BIENVENIDO BODEGA BODEGA BODEGA BODEGA" "BIENVENIDO BIENVENIDO BIENVENIDO BODEGA BODEGA BODEGA BODEGA" "ultimas-tx ultimas-tx ultimas-tx por-agotarse por-agotarse por-agotarse por-agotarse" "ultimas-tx ultimas-tx ultimas-tx por-agotarse por-agotarse por-agotarse por-agotarse" "ultimas-tx ultimas-tx ultimas-tx por-agotarse por-agotarse por-agotarse por-agotarse";
 }
 
-.ultimas-tx { grid-area: ultimas-tx; }
-
-.por-agotarse { grid-area: por-agotarse; }
+.BODEGA {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 1px 1px;
+  grid-template-areas: "productos productos proveedores proveedores" "productos productos proveedores proveedores" "categorias categorias usuarios usuarios" "categorias categorias usuarios usuarios";
+  grid-area: BODEGA;
+}
 
 .productos { grid-area: productos; }
 
-.categorias { grid-area: categorias; }
-
 .proveedores { grid-area: proveedores; }
 
-.imagen { grid-area: imagen; }
+.categorias { grid-area: categorias; }
 
 .usuarios { grid-area: usuarios; }
 
+.ultimas-tx { grid-area: ultimas-tx; }
 
+.por-agotarse {
+  display: grid;
+  grid-template-columns: 1.1fr 0.8fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1px 1px;
+  grid-template-areas: ". . ." ". . .";
+  grid-area: por-agotarse;
+}
 
-
+.BIENVENIDO { grid-area: BIENVENIDO; }
