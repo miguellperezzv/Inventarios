@@ -55,10 +55,18 @@ public class ControladorStock extends HttpServlet {
         }
         
         if(accion.equalsIgnoreCase("Ingreso")){
-            System.out.println("ENTRANDO CONTROLADOR STOCK ingreso");
-            int fk_usuario2 = Integer.parseInt(request.getParameter("k_usuario"));
+            System.out.println("ENTRANDO CONTROLADOR STOCK ingreso CODIGO ENVIADO ES "+ request.getParameter("k_usuario") );
+            int fk_usuario=0;
+            if(request.getParameter("k_usuario") == null){
+                fk_usuario = 1019138116; 
+            }   
+            else{
+                fk_usuario = Integer.parseInt(request.getParameter("k_usuario"));
+            }
+            
+            
             int k_tx = dao.getCantidadTx() + 1;
-            int fk_usuario = 1019138116;
+            
             int fk_producto = Integer.parseInt(request.getParameter("txtCodigo"));
             int fk_tipotx = Integer.parseInt(request.getParameter("txtTipoMovimiento"));
             int inout = 1;
@@ -66,7 +74,8 @@ public class ControladorStock extends HttpServlet {
             String descripcion = request.getParameter("txtDescripcion");
             
             m.setK_tx(k_tx);
-            m.setFk_usuario(fk_usuario2);
+            
+            m.setFk_usuario(fk_usuario);
             m.setFk_producto(fk_producto);
             m.setFk_tipo(fk_tipotx);
             m.setN_inout(inout);
