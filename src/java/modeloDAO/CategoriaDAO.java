@@ -36,8 +36,9 @@ public class CategoriaDAO implements CRUDCategoria{
             st=conn.prepareStatement(sql);
             System.out.println("LA SENTENCIA SQL ES :" +sql);
             rs=st.executeQuery();
-           
+            conn.close();
             return rs;
+           
             
         } catch (SQLException ex) {
             System.out.println("ERROR EN CATEGORIA DAO "+ ex);
@@ -64,6 +65,7 @@ public class CategoriaDAO implements CRUDCategoria{
                 c.setN_nombre(rs.getString("n_nombre"));
                 list.add(c);
             }
+            conn.close();
             return list;
             
         } catch (SQLException ex) {
@@ -85,6 +87,7 @@ public class CategoriaDAO implements CRUDCategoria{
             st = conn.prepareStatement(sql);
             System.out.println("SENTENCIA SQL "+ sql);
             st.executeUpdate();
+            conn.close();
             //System.out.println("rs.getInt(1) "+ rs.getInt(1));
             return true;
             
@@ -115,13 +118,14 @@ public class CategoriaDAO implements CRUDCategoria{
             while(rs.next()){
                 cantidad = rs.getInt("count");
             }
-            
+            conn.close();
             System.out.println("cantidad "+ cantidad);
             return cantidad;
             
             
         }catch(SQLException e){
             System.out.println("ERROR EN getCantidadCategorias "+ e);
+            
             return 0;
         }
             
@@ -153,7 +157,7 @@ public class CategoriaDAO implements CRUDCategoria{
             while(rs.next()){
                 nombre = rs.getString("n_nombre");
             }
-            
+            conn.close();
         } catch (SQLException ex) {
             System.out.println("Error enobtener nombre categoria por codigo en DAO "+ ex);
         }

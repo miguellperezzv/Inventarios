@@ -133,3 +133,23 @@ h1{
 .ultimas-tx { grid-area: ultimas-tx; }
 
 .por-agotarse { grid-area: por-agotarse; }
+
+
+
+
+
+.grid-container#grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 1px 1px;
+  grid-template-areas: "titulo-usuarios titulo-usuarios titulo-usuarios agregar-usuario agregar-usuario agregar-usuario" "usuarios usuarios usuarios agregar-usuario agregar-usuario agregar-usuario" "usuarios usuarios usuarios agregar-usuario agregar-usuario agregar-usuario" "usuarios usuarios usuarios agregar-usuario agregar-usuario agregar-usuario";
+}
+
+.titulo-usuarios { grid-area: titulo-usuarios; }
+
+.usuarios { grid-area: usuarios; }
+
+.agregar-usuario { grid-area: agregar-usuario; }
+  
+  

@@ -3,6 +3,7 @@
     Created on : 20-jun-2020, 21:22:05
     Author     : personal
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -39,22 +40,30 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="ControladorStock?accion=Stock"> <i class="fas fa-boxes"></i> Stock</a>
+                <a class="nav-link" href="ControladorStock?accion=Stock&k_usuario=${u.getK_usuario()}"> <i class="fas fa-boxes"></i> Stock</a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="#"><i class="fas fa-binoculars"></i>Vista General</a>
             </li>
+            
+            <c:if test="${u.getFk_tipoUsuario()== 'administrador'}">
+                <li class="nav-item">
+                <a class="nav-link" href="Controlador?accion=manage"><i class="fas fa-users-cog"></i>Gestion de Usuarios</a>
+                </li>
+            </c:if>
+            
+            
         </ul>
 
         <ul class="navbar-nav ">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-user-circle"></i>  Mi cuenta
+                  <i class="fas fa-user-circle"></i>  Mi cuenta (${u.getK_usuario()})
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#">Editar Perfil</a>
-                    <a class="dropdown-item" href="#">Cerrar Sesión</a>
+                    <a class="dropdown-item" href="Controlador?accion=Salir">Cerrar Sesión</a>
                 </div>
             </li>
         </ul>

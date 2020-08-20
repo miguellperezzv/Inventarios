@@ -56,17 +56,20 @@ public class Controlador extends HttpServlet {
             u.setK_contrasena(con);
 
             validez = dao.validar(u);
-            System.out.print("DAO VALIDAR " + validez);
+            //System.out.print("DAO VALIDAR " + validez);
 
             if (validez == true) {
 
-                request.getSession().setAttribute("cod", cod);
+                //request.getSession().setAttribute("cod", cod);
                 List<Movimiento> txs = txdao.ultimosMovimientos();
                 List<Producto> lista = pdao.agotados();
+                Usuario user = dao.usuarioPorCodigo(Integer.parseInt(cod));
+
                 request.setAttribute("txs", txs);
                 request.setAttribute("txdao", txdao);
                 request.setAttribute("pdao", new ProductoDAO());
                 request.setAttribute("lista", lista);
+                request.getSession().setAttribute("u", user);
                 request.getRequestDispatcher("vistas/principal.jsp").forward(request, response);
 
             } else {
@@ -80,7 +83,9 @@ public class Controlador extends HttpServlet {
             //request.getRequestDispatcher("vistas/principal.jsp").forward(request,response);
         }
         if (accion.equals("Salir")) {
+            request.getSession();
             request.getRequestDispatcher("index.jsp").forward(request, response);
+
         }
 
         if (accion.equals("Home")) {
@@ -91,17 +96,46 @@ public class Controlador extends HttpServlet {
             request.setAttribute("txdao", txdao);
             request.setAttribute("pdao", new ProductoDAO());
             request.setAttribute("lista", lista);
-           // request.getRequestDispatcher("vistas/principal.jsp").forward(request, response);
+
+            Usuario user = (Usuario) request.getSession().getAttribute("u");
+            request.setAttribute("u", u);
+            // request.getRequestDispatcher("vistas/principal.jsp").forward(request, response);
             request.getRequestDispatcher("vistas/principal.jsp").forward(request, response);
         }
         if (accion.equals("menu")) {
             request.getSession().setAttribute("nom", u.getN_nombre());
             request.getSession().setAttribute("correo", u.getN_email());
         }
-        if (accion.equals("seleccionar")) {
-            request.getSession().setAttribute("opc1", "Opcion1");
-            request.getSession().setAttribute("opc2", "Opcion2");
-            request.getSession().setAttribute("opc3", "Opcion3");
+        if (accion.equals("manage")) {
+
+            List<Usuario> usuarios = dao.ListarUsuarios();
+            request.setAttribute("usuarios", usuarios);
+            request.getRequestDispatcher("vistas/Usuarios.jsp").forward(request, response);
+        }
+
+        if (accion.equals("Registrar Usuario")) {
+
+            boolean validez = true;
+            int codigo = Integer.parseInt(request.getParameter("txtCodigo"));
+
+            String p1 = (String) request.getParameter("txtPassword");
+            String p2 = (String) request.getParameter("txtPassword2");
+            String nombre = (String) request.getParameter("txtNombre");
+            String email = (String) request.getParameter("txtEmail");
+
+            if (p1.equals(p2)) {
+                validez = true;
+                dao.registrarUsuario(codigo, p1, nombre, email);
+                List<Usuario> usuarios = dao.ListarUsuarios();
+                request.setAttribute("usuarios", usuarios);
+                request.getRequestDispatcher("vistas/Usuarios.jsp").forward(request, response);
+            } else {
+                validez = false;
+                String error = " Contraseñas no coinciden";
+                request.setAttribute("validez", validez);
+                request.setAttribute("error", error);
+                request.getRequestDispatcher("vistas/Usuarios.jsp").forward(request, response);
+            }
         }
 
         try (PrintWriter out = response.getWriter()) {

@@ -34,6 +34,7 @@ public class MovimientoDAO {
             st = conn.prepareStatement(sql);
             st.executeUpdate();
             System.out.println("Movimiento agregado! ");
+            conn.close();
         } catch (SQLException e) {
             System.out.println("ERROR EN AGREGARMOVIMIENTO EN movDAO! " + e);
         }
@@ -53,6 +54,7 @@ public class MovimientoDAO {
                 System.out.println("RS.NEXT() COUNT");
                 cantidad = rs.getInt("count");
             }
+            conn.close();
             return cantidad;
         } catch (SQLException e) {
             System.out.println("ERROR EN getCantidadTx() en Movimientodao " + e);
@@ -83,6 +85,7 @@ public class MovimientoDAO {
                 m.setF_movimiento(rs.getTimestamp("f_movimiento"));
                 lista.add(m);
             }
+            conn.close();
 
         } catch (SQLException e) {
             System.out.println("ERROR EN txs por producto " + e);
@@ -116,6 +119,7 @@ public class MovimientoDAO {
                 m.setF_movimiento(rs.getTimestamp("f_movimiento"));
                 lista.add(m);
             }
+            conn.close();
         } catch (SQLException e) {
             System.out.println("Error en obtener txs " + e);
         }
@@ -133,7 +137,7 @@ public class MovimientoDAO {
             while(rs.next()){
                 nombre = rs.getString("n_nombre");
             }
-            
+            conn.close();
         } catch(SQLException e){ System.out.println("ERROR EN GET NOMBRE TXDAO");}
         
         
@@ -150,7 +154,7 @@ public class MovimientoDAO {
             while(rs.next()){
                 nombre = rs.getString("n_nombre");
             }
-            
+            conn.close();
         } catch(SQLException e){ System.out.println("ERROR EN GET NOMBRE producto TXDAO" + e);}
         
         
@@ -178,7 +182,7 @@ public class MovimientoDAO {
             while(rs.next()){
                 nombre = rs.getString("n_descripcion");
             }
-            
+            conn.close();
         } catch(SQLException e){ System.out.println("ERROR EN GET tipo" + e);}
         
         

@@ -29,7 +29,7 @@
         <div class="container-sm">
             <div class="grid-container">
                 <div class="BIENVENIDO">
-                    <center> <h4>Bienvenido</h4> </center>
+                    <center> <h4>Bienvenido, ${u.getN_nombre()}</h4> </center>
                     <center><img src="https://www.clipartkey.com/mpngs/m/138-1387305_inventory-icon-white-png-clipart-png-download-vector.png" height="300px" width="300px"> </center>
                 </div>
                 <div class="BODEGA">
@@ -80,8 +80,8 @@
 
                 </div>
                 <div class="por-agotarse" style="margin-left: 10px;">
-                    
-                    
+
+
 
                     <div class="row">
 
@@ -92,7 +92,7 @@
                                 <div class="card-body">
                                     <center>
                                         <a> ${l.getN_nombre()} : ${l.getN_cantidad()}</a>
-                                       
+
                                     </center>
 
                                 </div>
@@ -103,7 +103,7 @@
                             </div>
                         </c:forEach>
 
-                        
+
 
                     </div>
 
@@ -112,7 +112,6 @@
 
 
         </div>
-
 
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -126,5 +125,6 @@
 
 
         </script>
+
     </body>
 </html>

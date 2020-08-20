@@ -14,9 +14,18 @@ public class Usuario {
     String k_contrasena;
     String n_nombre;
     String n_email;
+    String fk_tipoUsuario;
     
     public Usuario(){
         
+    }
+
+    public String getFk_tipoUsuario() {
+        return fk_tipoUsuario;
+    }
+
+    public void setFk_tipoUsuario(String fk_tipoUsuario) {
+        this.fk_tipoUsuario = fk_tipoUsuario;
     }
 
     public Usuario(String k_usuario, String k_contrasena, String n_nombre, String n_email) {
