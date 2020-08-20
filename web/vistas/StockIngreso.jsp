@@ -1,5 +1,7 @@
 <%@page import="modeloDAO.Tipo_TxDAO"%>
 <%@page import="java.sql.ResultSet"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
@@ -16,17 +18,17 @@
 
         <div class="form-group">
             
+            <input type="hidden" value="${u.getK_usuario()}" name = "k_usuario">
             
-            
-            <label >Código:
-                <input class="form-control" type="numeric" name="txtCodigo"> </label>
+            <label >CÃ³digo:
+                <input class="form-control" type="number" name="txtCodigo"> </label>
             <label >Unidades:
-                <input class="form-control" type="text" name="txtUnidades"></label>
+                <input class="form-control" type="number" name="txtUnidades"></label>
             <label >Descripcion:
                 <input class="form-control" type="text" name="txtDescripcion"></label>
 
             <label id="container">Tipo Movimiento: 
-                <select class="form-control" type="text" name="txtTipoMovimiento" placeholder="Ingrese su código"  onChange="mostrar(this.value);">
+                <select class="form-control" type="text" name="txtTipoMovimiento" placeholder="Ingrese su cÃ³digo"  onChange="mostrar(this.value);">
 
                     <%  while (rs.next()) {%>
                     <option value="<%=rs.getInt("k_tipotx")%>"> <%= rs.getString("n_descripcion")%> </option>

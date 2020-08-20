@@ -458,4 +458,20 @@ public class ProductoDAO implements CRUDProducto {
         return lista ;
     }
 
+    public int cantidadUnProducto(int fk_producto) {
+        int cant=0;
+         String sql = "SELECT n_cantidad FROM PRODUCTO  WHERE k_producto = "+fk_producto;
+        try {
+            conn = cn.getConnection();
+            st = conn.prepareStatement(sql);
+            rs = st.executeQuery();
+            while (rs.next()) {
+              cant = rs.getInt("n_cantidad");
+            }
+        } catch (SQLException e) {
+            System.out.println("ERROR cantidad productos" + e);
+        }
+        return cant;
+    }
+
 }

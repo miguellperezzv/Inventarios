@@ -97,7 +97,13 @@ public class Controlador extends HttpServlet {
             request.setAttribute("pdao", new ProductoDAO());
             request.setAttribute("lista", lista);
 
-            Usuario user = (Usuario) request.getSession().getAttribute("u");
+            //Usuario user = (Usuario) request.getSession().getAttribute("u");
+            //String codigo = (request.getParameter("k_usuario"));
+            
+            int codigo = Integer.parseInt(request.getParameter("k_usuario"));
+            System.out.println("codigo controlador  = " + codigo);
+            Usuario u = dao.usuarioPorCodigo(codigo);
+            
             request.setAttribute("u", u);
             // request.getRequestDispatcher("vistas/principal.jsp").forward(request, response);
             request.getRequestDispatcher("vistas/principal.jsp").forward(request, response);
@@ -134,6 +140,8 @@ public class Controlador extends HttpServlet {
                 String error = " Contraseñas no coinciden";
                 request.setAttribute("validez", validez);
                 request.setAttribute("error", error);
+                List<Usuario> usuarios = dao.ListarUsuarios();
+                request.setAttribute("usuarios", usuarios);
                 request.getRequestDispatcher("vistas/Usuarios.jsp").forward(request, response);
             }
         }

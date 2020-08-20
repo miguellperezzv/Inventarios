@@ -3,7 +3,7 @@
     Created on : 22-jun-2020, 19:39:41
     Author     : personal
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,6 +26,42 @@
         <div id="nav-placeholder" style="background-color:#0F4C81 ">
 
         </div>
+        
+     <c:if test="${validez == 1}">
+                    <center> <h6>Datos Incorrectos</h6> </center>
+                    <div class="alert alert-danger" role="alert">
+                       Se produjo un error. Intente nuevamente 
+                    </div>
+    </c:if>          
+    
+    <c:if test="${validez == 2}">
+                    
+                    <div class="alert alert-success" role="alert">
+                       Movimiento a la bodega agregado! 
+                    </div>
+                </c:if>
+        
+   <c:if test="${validez2 == 1}">
+                    <center> <h6>Datos Incorrectos</h6> </center>
+                    <div class="alert alert-danger" role="alert">
+                       Se produjo un error. Intente nuevamente 
+                    </div>
+    </c:if>          
+    
+    <c:if test="${validez2 == 2}">
+                    
+                    <div class="alert alert-success" role="alert">
+                       Movimiento a la bodega agregado! 
+                    </div>
+                </c:if>
+                    
+    <c:if test="${validez2 == 3}">
+                    
+                    <div class="alert alert-danger" role="alert">
+                       El monto a retirar excede a la cantidad de artículos en la bodega
+                    </div>
+                </c:if>
+                 
         <div class ="container col-lg-5" background-color="#ffffff"  margin-top="50px" style="color: white; font-family: Impact; size:20px;">
             <form action="ControladorProveedor" method="post" target="_blank" name="accion">
                 <input type="radio" name="eleccion" value="ingreso" name="accion" id="NuevoProveedor"> INGRESO  <p>

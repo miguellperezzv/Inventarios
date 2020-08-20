@@ -1,5 +1,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="modeloDAO.Tipo_TxDAO"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="form-group" style="width: 600px; margin:auto;">
 
     <%Tipo_TxDAO tx = new Tipo_TxDAO();%>
@@ -7,19 +9,20 @@
     <form action="ControladorStock"> 
 
         <div class="form-group">
-
-            <label >Código:
-                <input class="form-control" type="numeric" name="txtCodigo"> </label>
+            <input type="hidden" value="${u.getK_usuario()}" name = "k_usuario">
+            
+            <label >CÃ³digo:
+                <input class="form-control" type="number" name="txtCodigo"> </label>
 
             <label >Descripcion:
-                <input class="form-control" type="numeric" name="txtDescripcion"> </label>
+                <input class="form-control" type="text" name="txtDescripcion"> </label>
 
 
             <label >Unidades:
-                <input class="form-control" type="text" name="txtUnidades"></label>
+                <input class="form-control" type="number" name="txtUnidades"></label>
 
             <label id="container">Tipo Movimiento: 
-                <select class="form-control" type="text" name="txtTipoMovimiento" placeholder="Ingrese su código"  onChange="mostrar(this.value);">
+                <select class="form-control" type="text" name="txtTipoMovimiento" placeholder="Ingrese su cÃ³digo"  onChange="mostrar(this.value);">
 
                     <%  while (rs.next()) {%>
                     <option value="<%=rs.getInt("k_tipotx")%>"> <%= rs.getString("n_descripcion")%> </option>

@@ -81,7 +81,7 @@
                 </div>
                 <div class="por-agotarse" style="margin-left: 10px;">
 
-
+                <center> <h4>Productos agotados y por agotarse</h4> </center>
 
                     <div class="row">
 

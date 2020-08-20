@@ -25,7 +25,7 @@ public class MovimientoDAO {
     PreparedStatement st;
     ResultSet rs;
 
-    public void AgregarMovimento(Movimiento m) {
+    public int AgregarMovimento(Movimiento m) {
 
         String sql = "INSERT INTO movimiento VALUES (" + m.getK_tx() + "," + m.getFk_usuario() + ", " + m.getFk_producto() + "," + m.getFk_tipo() + ", " + m.getN_inout() + ", '" + m.getN_descripcion() + "', CURRENT_TIMESTAMP  )";
 
@@ -35,8 +35,10 @@ public class MovimientoDAO {
             st.executeUpdate();
             System.out.println("Movimiento agregado! ");
             conn.close();
+            return 2;
         } catch (SQLException e) {
             System.out.println("ERROR EN AGREGARMOVIMIENTO EN movDAO! " + e);
+            return 1;
         }
 
     }

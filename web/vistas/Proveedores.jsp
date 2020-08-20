@@ -3,8 +3,9 @@
     Created on : 22-jun-2020, 16:54:48
     Author     : personal
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>

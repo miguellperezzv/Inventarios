@@ -51,12 +51,15 @@ public class ControladorStock extends HttpServlet {
         if(accion.equalsIgnoreCase("Stock")){
             //int codigo = Integer.parseInt(request.getParameter("btnStock"));
             //request.setAttribute("codigo", codigo);
+            int validez =0;
+            request.setAttribute("validez", validez);
             request.getRequestDispatcher("vistas/Stock.jsp").forward(request, response);
         }
         
         if(accion.equalsIgnoreCase("Ingreso")){
             System.out.println("ENTRANDO CONTROLADOR STOCK ingreso CODIGO ENVIADO ES "+ request.getParameter("k_usuario") );
             int fk_usuario=0;
+            System.out.println("El usuario es "+ request.getParameter("k_usuario") );
             if(request.getParameter("k_usuario") == null){
                 fk_usuario = 1019138116; 
             }   
@@ -83,15 +86,24 @@ public class ControladorStock extends HttpServlet {
             
             Producto p = daoProducto.ProductoPorCodigo(fk_producto);
             daoProducto.IngresarUnidades(fk_producto, unidades);
-            dao.AgregarMovimento(m);
+            int validez = dao.AgregarMovimento(m);
+            request.setAttribute("validez", validez);
             request.getRequestDispatcher("vistas/Stock.jsp").forward(request, response);
         }
         
         if(accion.equalsIgnoreCase("Retirar")){
             System.out.println("ENTRANDO CONTROLADOR STOCK Egreso");
-            int fk_usuario2 = Integer.parseInt(request.getParameter("k_usuario"));
+            
             int k_tx = dao.getCantidadTx() + 1;
-            int fk_usuario = 1019138116;
+            
+            
+            int fk_usuario=0;
+            if(request.getParameter("k_usuario") == null){
+                fk_usuario = 1019138116; 
+            }   
+            else{
+                fk_usuario = Integer.parseInt(request.getParameter("k_usuario"));
+            }
             int fk_producto = Integer.parseInt(request.getParameter("txtCodigo"));
             int fk_tipotx = Integer.parseInt(request.getParameter("txtTipoMovimiento"));
             int inout = 0;
@@ -99,15 +111,29 @@ public class ControladorStock extends HttpServlet {
             String descripcion = request.getParameter("txtDescripcion");
             
             m.setK_tx(k_tx);
-            m.setFk_usuario(fk_usuario2);
+            m.setFk_usuario(fk_usuario);
             m.setFk_producto(fk_producto);
             m.setFk_tipo(fk_tipotx);
             m.setN_inout(inout);
             m.setN_descripcion(descripcion);
             
-            daoProducto.IngresarUnidades(fk_producto, -unidades);
-            dao.AgregarMovimento(m);
+            
+            if(unidades> daoProducto.cantidadUnProducto(m.getFk_producto()) ){
+               int validez = 3;
+            request.setAttribute("validez2", validez);
+            
+            request.getRequestDispatcher("vistas/Stock.jsp").forward(request, response); 
+            }
+            
+            else{
+                daoProducto.IngresarUnidades(fk_producto, -unidades);
+            
+            int validez = dao.AgregarMovimento(m);
+            request.setAttribute("validez2", validez);
+            
             request.getRequestDispatcher("vistas/Stock.jsp").forward(request, response);
+            }
+            
         }
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */

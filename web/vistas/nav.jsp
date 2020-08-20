@@ -4,6 +4,8 @@
     Author     : personal
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -16,7 +18,7 @@
     
 <nav class="navbar navbar-expand-lg navbar-light bg-light"  >
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="Controlador?accion=Home">
+        <a class="navbar-brand" href="Controlador?accion=Home&k_usuario=${u.getK_usuario()}">
             <img src="https://img2.freepng.es/20180421/whe/kisspng-computer-icons-management-symbol-clipboard-icon-de-summary-vector-5adb33b5a11493.2879916115243150616598.jpg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
             Mi Inventario <span class="sr-only">(current)</span>
         </a>
@@ -63,7 +65,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#">Editar Perfil</a>
-                    <a class="dropdown-item" href="Controlador?accion=Salir">Cerrar Sesión</a>
+                    <a class="dropdown-item" href="Controlador?accion=Salir">Cerrar SesiÃ³n</a>
                 </div>
             </li>
         </ul>
